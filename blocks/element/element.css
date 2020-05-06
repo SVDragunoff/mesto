@@ -1,0 +1,10 @@
+@import url(./__heart/element__heart.css);
+@import url(./__image/element__image.css);
+@import url(./__title/element__title.css);
+.element{
+  background-color: #FFFFFF;
+  width: 282px;
+  height: 361px;
+  display: grid;
+  border-radius: 10px;
+}
