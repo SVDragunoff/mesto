@@ -20,3 +20,9 @@
       justify-items: center;
         }
     }
+@media (max-width : 403px){
+.elements{
+  width: 100%;
+  grid-gap: 1%;
+          }
+      }

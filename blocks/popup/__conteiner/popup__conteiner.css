@@ -6,3 +6,18 @@
   background: #FFFFFF;
 
 }
+@media (max-width : 1100px){
+.popup__conteiner{
+width: 50%;
+          }
+      }
+@media (max-width : 760px){
+.popup__conteiner{
+  width: 70%;
+                  }
+              }
+@media (max-width : 760px){
+.popup__conteiner{
+width: 85%;
+                                  }
+                              }

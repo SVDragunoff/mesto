@@ -7,3 +7,20 @@
   padding-bottom:7%;
   width: 67.5%;
 }
+@media (max-width : 1100px){
+.footer{
+  margin: 15% auto; 
+      }
+  }
+@media (max-width : 760px){
+.footer{
+  margin: 40% auto; 
+  width: 37.5%;
+          }
+      }
+@media (max-width : 760px){
+.footer{
+  width: 90%;
+  margin: 45% auto; 
+              }
+          }

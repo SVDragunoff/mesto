@@ -14,3 +14,8 @@
   justify-items: center;
       }
   }
+@media (max-width : 403px){
+.profile{
+  width: 100%;
+          }
+      }

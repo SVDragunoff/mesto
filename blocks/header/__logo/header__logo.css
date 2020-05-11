@@ -4,3 +4,8 @@
   margin-bottom: 40px
   
 }
+@media (max-width : 403px){
+.header__logo{
+  
+margin-left: 8%;            }
+                }

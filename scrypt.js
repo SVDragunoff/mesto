@@ -12,7 +12,7 @@ closeProfile.addEventListener('click', closePr);
 
 
 // Находим форму в DOM
-let formElement = document.querySelector('.popup');
+let formElement = document.querySelector('.popup__conteiner');
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
@@ -27,7 +27,7 @@ function formSubmitHandler (evt) {
     // Получите значение полей из свойства value
 
     // Выберите элементы, куда должны быть вставлены значения полей
-    
+    nameInput.textContent = document.querySelector('.profile__info-title');
     // Вставьте новые значения с помощью textContent
 }
 
