@@ -4,5 +4,13 @@
   height: 50px;
   align-self: center;
   justify-self: self-end;
+  cursor: pointer;
   
 }
+@media (max-width : 760px){
+.profile__add-button{
+  grid-template-columns: repeat(1, 1fr);
+  justify-items: center;
+  width: 100%;
+        }
+    }

@@ -6,3 +6,10 @@
   margin-top: 10px;
 
 }
+@media (max-width : 760px){
+.profile__info-subtitle{
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+      }
+  }

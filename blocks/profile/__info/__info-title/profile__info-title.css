@@ -5,3 +5,12 @@
   margin-bottom: 0;
   
 }
+@media (max-width : 760px){
+  .profile__info-title{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 27px;
+    line-height: 56px;
+    text-align: center;
+      }
+  }

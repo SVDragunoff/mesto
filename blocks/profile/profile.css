@@ -4,6 +4,13 @@
 .profile{
   margin-top:40px;  
   display: grid;
-  margin-top: 40px;
   grid-template-columns: 20% 50% 30%;
+  width: 67.5%;
+  margin: 40px auto;
 }
+@media (max-width : 760px){
+.profile{
+  grid-template-columns: repeat(1, 1fr);
+  justify-items: center;
+      }
+  }
