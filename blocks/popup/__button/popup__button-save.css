@@ -4,5 +4,9 @@
   margin-left: 8%;
   margin-top: 5%;   
   background: #000000;
-
+  cursor: pointer;
+}
+.popup__button-save:hover{
+  opacity: 0.5;
+  
 }

@@ -1,5 +1,7 @@
+@import url(./popup__input-name.css);
+@import url(./popup__input-job.css);
+
 .popup__inputs{
     margin: 10% 8% auto;
     border:none;
-    width: 90%;
-    }
+    width: 90%;}
