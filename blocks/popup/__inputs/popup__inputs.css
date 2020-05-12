@@ -2,6 +2,8 @@
 @import url(./popup__input-job.css);
 
 .popup__inputs{
-    margin: 10% 8% auto;
+    align-self: flex-end;
     border:none;
-    width: 90%;}
+    width: 92%;
+    padding-top: 10%;
+}
