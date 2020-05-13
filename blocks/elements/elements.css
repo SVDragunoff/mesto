@@ -3,7 +3,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    grid-gap: 2%;
+    grid-gap: 20px;
     width: 67.5%;
     margin: 5.5% auto;
 }
@@ -23,6 +23,6 @@
 @media (max-width : 403px){
 .elements{
   width: 100%;
-  grid-gap: 1%;
+  
           }
       }

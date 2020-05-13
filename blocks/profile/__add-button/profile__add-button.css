@@ -7,6 +7,9 @@
   cursor: pointer;
   
 }
+.profile__add-button:hover{
+  background: rgba(65, 63, 63, 0.8);
+}
 @media (max-width : 760px){
 .profile__add-button{
   grid-template-columns: repeat(1, 1fr);
