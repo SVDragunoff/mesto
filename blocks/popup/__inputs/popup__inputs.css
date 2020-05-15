@@ -1,11 +1,9 @@
-@import url(./popup__input-name.css);
-@import url(./popup__input-job.css);
 
 .popup__inputs{
     align-self: center;
     border:none;
     width: 84%;
     padding-top: 13%;
-    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     padding:10px;
 }

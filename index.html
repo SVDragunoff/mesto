@@ -7,21 +7,7 @@
     <title>Место</title>
 </head>
 <body class="page">
-    <div class="popup">
-        <form name="popup" class="popup__conteiner">
-            <h2 class="popup__title">Редактировать профиль</h2>
-            <input name="input-name" class="popup__inputs popup__inputs_name" type="text" placeholder="Жак-Ив Кусто">
-            
-            <input name="input-job" class="popup__inputs popup__inputs_job" type="text" placeholder="Исследователь океана">
-            
-            <button type="submit" class="popup__button-save">
-                 Сохранить
-            </button>
-            <button type="reset" class="popup__button-close">
-                
-           </button>
-        </form>
-    </div>
+    
 <header class="header">
     <img class="header__logo" src="./images/Logo.svg" alt="Лого-Место">
 </header>
@@ -82,7 +68,24 @@
         </button>
     </div>
 </section>
-<footer class="footer">&#169;2020 Mesto Russia</footer>
+<div class="popup">
+    <form name="popup" class="popup__conteiner">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <input name="input-name" class="popup__inputs popup__inputs_name" type="text" placeholder="Жак-Ив Кусто">
+        
+        <input name="input-job" class="popup__inputs popup__inputs_job" type="text" placeholder="Исследователь океана">
+        
+        <button type="submit" class="popup__button-save">
+             Сохранить
+        </button>
+        <button aria-label="close" type="reset" class="popup__button-close">
+            
+       </button>
+    </form>
+</div>
+<footer class="footer">
+    <p>&#169;2020 Mesto Russia</p>
+</footer>
 <script src="JS/scrypt.js"></script>
 </body>
 </html>

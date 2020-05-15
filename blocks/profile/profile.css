@@ -1,6 +1,9 @@
 @import url(./__avatar/profile__avatar.css);
 @import url(./__info/profile__info.css);
 @import url(./__add-button/profile__add-button.css);
+@import url(./__info-title/profile__info-title.css);
+@import url(./__info-subtitle/profile__info-subtitle.css);
+@import url(./__info-button/profile__info-button.css);
 .profile{
   margin-top:40px;  
   display: grid;
