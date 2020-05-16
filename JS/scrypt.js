@@ -7,8 +7,9 @@ const profileJob = document.querySelector('.profile__info-subtitle');
 let nameInput = document.querySelector('.popup__inputs_name');
 let jobInput = document.querySelector('.popup__inputs_job');
 
-//нужно разобраться, как объединить функции открытия и закрытия PopupА
+//нужно разобраться, как объединить функции открытия и закрытия Popup
 function openPopup () {
+    
     formElement.classList.add('popup_open');
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
