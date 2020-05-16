@@ -13,6 +13,7 @@ function openPopup () {
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
 }
+// функция закрытия "Попап"
 function closePopup () {
     formElement.classList.remove('popup_open');
 }
@@ -24,7 +25,7 @@ function closePopup () {
 
 
 
-
+// функция присвоения введенных данных в окне "Попап" в соответствующие поля
 function formSubmitHandler (evt) {
     evt.preventDefault(); 
 
@@ -34,9 +35,10 @@ function formSubmitHandler (evt) {
 
     closePopup();
 }
-
+//кнопка "редактирование"
 editProfile.addEventListener('click', openPopup);
+//кновка "крест"
 closeProfile.addEventListener('click', closePopup);
-
+//кновка "сохранить"
 formElement.addEventListener('submit', formSubmitHandler);
 

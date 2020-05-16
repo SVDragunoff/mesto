@@ -4,7 +4,7 @@
 .element{
   background-color: #FFFFFF;
   width: 282px;
-  height: 361px;
+  
   display: grid;
   border-radius: 10px;
 }

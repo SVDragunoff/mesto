@@ -1,8 +1,6 @@
-@import url(../__info-title/profile__info-title.css);
-@import url(../__info-subtitle/profile__info-subtitle.css);
-@import url(../__info-button/profile__info-button.css);
+
 .profile__info{
-margin-left: 30px;
+
 display: grid;
    
 
