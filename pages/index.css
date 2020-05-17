@@ -5,14 +5,5 @@
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/popup/popup.css);
-@import url(./_open/popup_open.css);
-.page{
-    font-family: 'inter', 'Arial', 'sans-serif';
-    background-color: #000000;
-    max-width: 1280px;
-    min-width: 300px;
-    color: #FFFFFF;
-    margin: auto;
-    
-    
-    }
+@import url(../blocks/page/page.css);
+@import url(../blocks/popup/_open/popup_open.css);
