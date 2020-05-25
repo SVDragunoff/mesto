@@ -1,0 +1,15 @@
+.popup-place__button-save{
+    width: 80%;
+    min-height: 50px;
+    margin-left: 8%;
+    margin-top: 5%;   
+    background: #000000;
+    cursor: pointer;
+    color: white;
+    border-radius: 2px;
+    border: 0;
+  }
+  .popup-place__button-save:hover{
+    background: rgba(0, 0, 0, 0.8);
+    
+  }
