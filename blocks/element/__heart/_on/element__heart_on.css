@@ -1,0 +1,9 @@
+.element__heart_on {         
+    background-image: url(../../../../images/Vector-heart_black.svg);
+    
+}
+
+.element__heart_on:hover {
+    opacity: 1.6;
+    
+}
