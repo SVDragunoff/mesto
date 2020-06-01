@@ -7,6 +7,7 @@
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/page/page.css);
 @import url(../blocks/popup-place/popup-place.css);
+@import url(../blocks/popup__image/popup__image.css);
 @import url(../blocks/popup/_open/popup_open.css);
 @import url(../blocks/element/__heart/_on/element__heart_on.css);
 
