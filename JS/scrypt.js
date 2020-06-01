@@ -37,7 +37,7 @@ const addButton = document.querySelector('.popup-place');
 const addClose = document.querySelector('.popup-place__button-close');
 const popupUrl = document.querySelector('.popup-place__inputs_link');
 const popupTitle = document.querySelector('.popup-place__inputs_name');
-const popupSave = document.querySelector('.popup-place__button-save');
+const popupSave = document.querySelector('.popup-place');
 
 const elements = document.querySelector(".elements") //находим элемент, содержащий шаблон
 const elementsTemplate = document.querySelector('.cardTemplate').content; //находим шаблон template
@@ -61,28 +61,37 @@ function render(){//функция перебора массива
 
 render();//вызов функции добавления скопированных елементов
 
-function creatCard (evt) {
-    evt.preventDefault();
-    addCard(popupUrl.value, popupTitle.value);
-    openClosePopup();
-  };
+function creatCards(e) {
+    e.preventDefault(); //отмена стандартного submit
+    const elementTemplate = document.querySelector(".cardTemplate").content; //находим заготовку
+    const element = elementTemplate.cloneNode(true); //копируем заготовку
+
+    const elementImage = element.querySelector(".element__image"); //находим поле image
+    const elementTitle = element.querySelector(".element__title"); //находим поле title 
+
+    elementImage.src = popupUrl.value; //вставляем ссылку из поле popup
+    elementTitle.textContent = popupTitle.value; //вставляем текст из поле popup
+
+    elements.prepend(element);
+
+    openCloseAdd();
+}
   
 
 //function DelElem(event){//Удаляет элемент
  //   const deleteElement = event.target.closest('.element__delete');
   //  deleteElement.parentNode.remove();
 //}
-const deletePlace = document.querySelectorAll('.element__delete');
-const buttonLike = document.querySelector('.element__heart');
+//const deleteButton = document.querySelectorAll('.element__delete');
+
 
 function DelElement(ev) {
-    ev.target.closest('.element').remove()
-  }
-
-  deletePlace.forEach(function (ele) {
-      ele.addEventListener('click', DelElement)
-  });
-
+  let deleteButton = ev.target.closest('.element__delete');
+  
+if (deleteButton)  {
+    deleteButton.closest('.element').remove()
+}
+}
 //buttonLike.addEventListener('click', addLike);
 
 //function addLike (e) {
@@ -140,6 +149,7 @@ formElement.addEventListener('submit', formSubmitHandler);
 //открывает и закрывает попоап "Место"
 addImage.addEventListener('click', openCloseAdd);
 addClose.addEventListener('click', openCloseAdd);
-//elements.addEventListener('click', chooseCard);
-popupSave.addEventListener('submit', creatCard);
+
+popupSave.addEventListener('submit', creatCards);
 elements.addEventListener('click', addLike);
+elements.addEventListener('click', DelElement);

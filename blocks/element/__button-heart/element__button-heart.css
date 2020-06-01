@@ -1,4 +1,8 @@
 .element__button-heart{
     border:none;
     background-color: #FFFFFF;
+    
+}
+.element__button-heart:focus{
+    outline: none;
 }
