@@ -72,6 +72,7 @@ function creatCards(e) {//функция создания новых фото
     const elementTitle = element.querySelector(".element__title"); //поле title 
 
     elementImage.src = popupUrl.value; //вставляем ссылку из поля popup
+    elementImage.alt = popupTitle.value
     elementTitle.textContent = popupTitle.value; //вставляем текст из поля popup
 
     elements.prepend(element);//помещаем фото в начало списка
@@ -81,7 +82,7 @@ function creatCards(e) {//функция создания новых фото
   
 
 function DelElement(ev) {//функция удаления елемента
-  let deleteButton = ev.target.closest('.element__delete');
+let deleteButton = ev.target.closest('.element__delete');
   
 if (deleteButton)  {
     deleteButton.closest('.element').remove()
