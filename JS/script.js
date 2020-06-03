@@ -27,21 +27,17 @@ const initialCards = [//массив с фото и наименованием
 const editProfile = document.querySelector('.profile__info-button');//кнопка редактирования профиля
 const closeProfile = document.querySelector('.popup__button-close');//кнопка закрытия окна редактирования профиля
 const formElement = document.querySelector('.popup');//попап
-const saveButton = document.querySelector('.popup__button-save');//кновка сохранения редактирования профиля
 const profileName = document.querySelector('.profile__info-title');//имя
 const profileJob = document.querySelector('.profile__info-subtitle');//род занятости
-let nameInput = document.querySelector('.popup__inputs_name');//поле ввода имени
-let jobInput = document.querySelector('.popup__inputs_job');//поле ввода профессии
+const nameInput = document.querySelector('.popup__inputs_name');//поле ввода имени
+const jobInput = document.querySelector('.popup__inputs_job');//поле ввода профессии
 const addImage = document.querySelector('.profile__add-button');//кнопка добавления фото
-const addButton = document.querySelector('.popup-place');//попап место
+const addPlaceButton = document.querySelector('.popup-place');//попап место
 const addClose = document.querySelector('.popup-place__button-close');//кнопка закрытия попап место
 const popupUrl = document.querySelector('.popup-place__inputs_link');//ссылка на фото
 const popupTitle = document.querySelector('.popup-place__inputs_name');//текс фото
-const popupSave = document.querySelector('.popup-place');//кнопка сохранения фото
-
 const elements = document.querySelector(".elements") //шаблон
 const elementsTemplate = document.querySelector('.cardTemplate').content; //template
-const popupImage = document.querySelector('.element__image');//поле расположения фото
 const imagePopup = document.querySelector('.popup__image');//для функции добавления фото
 const imagePopupSrc = document.querySelector('.popup__image_src');//для функции добавления фото_ссылка
 const imagePopupText = document.querySelector('.popup__image_text');//для функции добавления фото_текст
@@ -59,7 +55,7 @@ function addCard(item) {
 
 function render(){//функция перебора массива
     initialCards.forEach(addCard)
-};
+}
 
 render();//вызов функции добавления скопированных елементов
 
@@ -81,8 +77,8 @@ function creatCards(e) {//функция создания новых фото
 }
   
 
-function DelElement(ev) {//функция удаления елемента
-let deleteButton = ev.target.closest('.element__delete');
+function delElement(ev) {//функция удаления елемента
+const deleteButton = ev.target.closest('.element__delete');
   
 if (deleteButton)  {
     deleteButton.closest('.element').remove()
@@ -90,21 +86,21 @@ if (deleteButton)  {
 }
 
 function addLike(ev) {//функция добавления лайка
-    let buttonLike = ev.target.closest('.element__heart');
+    const buttonLike = ev.target.closest('.element__heart');
     if (buttonLike) {
         buttonLike.classList.toggle('element__heart_on');
     }
   }
 
-  function imageClick(event) {//открыть фото
-    let popupImage = event.target.closest('.element__image');
+function openPhoto(event) {//открыть фото
+    const popupImage = event.target.closest('.element__image');
     if (popupImage) {
         openCloseImg(imagePopup);
         imagePopupSrc.src = popupImage.src;
         imagePopupText.textContent = popupImage.alt;
-            
+        
     }
-  }
+}
   
 //Открывает и закрывает попап редактирования профиля
 function openClosePopup () {
@@ -122,7 +118,9 @@ function formSubmitHandler (evt) {
 }
 //Открывает и закрывает попап "Место"
 function openCloseAdd () {
-    addButton.classList.toggle('popup_open');
+    addPlaceButton.classList.toggle('popup_open');
+    popupUrl.value = '';
+    popupTitle.value = '';
     
 }
 function openCloseImg () {//Открывает и закрывает попап "Фото"
@@ -142,34 +140,12 @@ addClose.addEventListener('click', openCloseAdd);
 //закрывает попап "Фото"
 imgClose.addEventListener('click', openCloseImg);
 //сохраняет новое фото
-popupSave.addEventListener('submit', creatCards);
+addPlaceButton.addEventListener('submit', creatCards);
 //ставит лайк
 elements.addEventListener('click', addLike);
 //удаляет элемент
-elements.addEventListener('click', DelElement);
+elements.addEventListener('click', delElement);
 //открывает фото
-elements.addEventListener('click', imageClick);
+elements.addEventListener('click', openPhoto);
 
 
-            /*Кладбище некорректно работующего кода,
-            с которым стоит разобраться
-
-function DelElem(event){//Удаляет элемент
-const deleteElement = event.target.closest('.element__delete');
-deleteElement.parentNode.remove();
-}
-const deleteButton = document.querySelectorAll('.element__delete');
-function LikeElement(ev) {
-ev.target.closest('.element__heart').classList.toggle('element__heart_on');
-}  
-buttonLike.forEach(function (ele) {
-ele.addEventListener('click', LikeElement)
-});
-buttonLike.forEach(addEventListener('click', function (evt) {
-evt.target.classList.toggle('element__heart_on');
-}));
-buttonLike.addEventListener('click', addLike);
-
-function addLike (e) {
-e.target.closest('.element__heart').classList.toggle('element__heart_on');
-}*/
