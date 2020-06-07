@@ -1,6 +1,8 @@
 .element__button-heart{
     border:none;
     background-color: #FFFFFF;
+    width: 35px;
+    justify-self: flex-end;
     
 }
 .element__button-heart:focus{
