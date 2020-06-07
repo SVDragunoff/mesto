@@ -39,12 +39,12 @@
     </template> 
 </section>
 <div class="popup">
-    <form name="popup" class="popup__conteiner">
+    <form name="popup" class="popup__conteiner" >
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input name="input-name" class="popup__inputs popup__inputs_name" type="text" placeholder="Имя">
-        
-        <input name="input-job" class="popup__inputs popup__inputs_job" type="text" placeholder="Работа">
-        
+        <input name="input-name" class="popup__inputs popup__inputs_name" type="text" id="input-name" placeholder="Имя" minlength="2" maxlength="40" autocomplete="off">
+        <span id="input-name-error" class="error"></span>
+        <input name="input-job" class="popup__inputs popup__inputs_job" type="text" id="input-job" placeholder="Работа" minlength="2" maxlength="40" autocomplete="off">
+        <span id="input-job-error" class="error"></span>
         <button type="submit" class="popup__button-save">
              Сохранить
         </button>
@@ -54,13 +54,13 @@
     </form>
 </div>
 <div class="popup-place">
-    <form name="popup-place" class="popup-place__conteiner">
+    <form name="popup-place" class="popup__conteiner popup-place__conteiner">
         <h2 class="popup-place__title">Новое место</h2>
-        <input name="input__place" class="popup__inputs popup-place__inputs_name" type="text" placeholder="Название">
-        
-        <input name="input__link" class="popup__inputs popup-place__inputs_link" type="text" placeholder="Ссылка на картинку">
-        
-        <button type="submit" class="popup-place__button-save">
+        <input name="input-place" class="popup__inputs popup-place__inputs_name " id="input-place" type="text" placeholder="Название" minlength="2" maxlength="30">
+        <span id="input-place-error" class="error"></span>
+        <input name="input-link" class="popup__inputs popup-place__inputs_link" id="input-link" type="url" placeholder="Ссылка на картинку">
+        <span id="input-link-error" class="error"></span>
+        <button type="submit" disabled class="popup__button-save popup-place__button-save">
              Создать
         </button>
         <button aria-label="close" type="reset" class="popup-place__button-close">
@@ -83,5 +83,6 @@
     <p class="footer__text">&#169;2020 Mesto Russia</p>
 </footer>
 <script src="JS/script.js"></script>
+<script src="JS/validate.js"></script>
 </body>
 </html>

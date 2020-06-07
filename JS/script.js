@@ -75,7 +75,9 @@ function creatCards(e) {//функция создания новых фото
 
     openCloseAdd();
 }
-  
+
+
+
 
 function delElement(ev) {//функция удаления елемента
 const deleteButton = ev.target.closest('.element__delete');
