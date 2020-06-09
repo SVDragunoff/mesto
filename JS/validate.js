@@ -10,8 +10,6 @@ enableValidation({
 function enableValidation(options){
     const formElement = Array.from(document.querySelectorAll(options.formSelector));
     formElement.forEach(formElement => {
-
-    
     const inputElements = formElement.querySelectorAll(options.inputSelector);
     inputElements.forEach(input => {
        input.addEventListener('input', handleInput)
@@ -37,7 +35,6 @@ function handleInput(evt){
            error.textContent = '';
     }else{
     error.textContent = input.validationMessage;
-    console.log(input.validationMessage);
     }
    }
   

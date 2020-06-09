@@ -76,7 +76,10 @@ function creatCards(e) {//функция создания новых фото
     openCloseAdd();
 }
 
-
+function togglePopup(popup) {//Открывает и закрывает попап
+    formElement.classList.toggle('popup_open');
+    
+}
 
 
 function delElement(ev) {//функция удаления елемента
@@ -100,6 +103,7 @@ function openPhoto(event) {//открыть фото
         openCloseImg(imagePopup);
         imagePopupSrc.src = popupImage.src;
         imagePopupText.textContent = popupImage.alt;
+        document.addEventListener('keydown', closePopupButtonEsc);
         
     }
 }
@@ -109,6 +113,7 @@ function openClosePopup () {
     formElement.classList.toggle('popup_open');
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
+    document.addEventListener('keydown', closePopupButtonEsc);
 }
 
 //функция присвоения введенных данных в окне "Попап" для соответствующего поля
@@ -117,18 +122,44 @@ function formSubmitHandler (evt) {
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
     openClosePopup();
+    
 }
 //Открывает и закрывает попап "Место"
 function openCloseAdd () {
     addPlaceButton.classList.toggle('popup_open');
     popupUrl.value = '';
     popupTitle.value = '';
-    
+    document.addEventListener('keydown', closePopupButtonEsc);
 }
+
+function closePopupButtonEsc(evt) {
+    if (evt.key === 'Escape') {
+      document.querySelector('.popup_open').classList.remove('popup_open');
+      document.removeEventListener('keydown', closePopupButtonEsc);
+    }
+  }
+
+  
+  function mouseClick(evt) { // клик на оверлей                
+    if (evt.target.classList.contains('popup')) {
+        formElement.classList.remove('popup_open');
+    }
+    if (evt.target.classList.contains('popup__image')) {
+        imagePopup.classList.remove('popup_open');
+    }
+    if (evt.target.classList.contains('popup-place')) {
+        addPlaceButton.classList.remove('popup_open');
+    }
+  }
+
+ 
+
+
 function openCloseImg () {//Открывает и закрывает попап "Фото"
     imagePopup.classList.toggle('popup_open');
     
 }
+//formElement.addEventListener('click', mouseClick);
 
 //кнопка "редактирование"
 editProfile.addEventListener('click', openClosePopup);
@@ -149,5 +180,7 @@ elements.addEventListener('click', addLike);
 elements.addEventListener('click', delElement);
 //открывает фото
 elements.addEventListener('click', openPhoto);
-
+document.querySelectorAll('.popup').forEach((popupElement) => {
+    popupElement.addEventListener('click', mouseClick);
+  });
 

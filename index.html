@@ -45,7 +45,7 @@
         <span id="input-name-error" class="error"></span>
         <input name="input-job" class="popup__inputs popup__inputs_job" type="text" id="input-job" placeholder="Работа" minlength="2" maxlength="40" autocomplete="off">
         <span id="input-job-error" class="error"></span>
-        <button type="submit" class="popup__button-save">
+        <button type="submit" class="popup__button_disabled popup__button-save">
              Сохранить
         </button>
         <button aria-label="close" type="reset" class="popup__button-close">
@@ -53,14 +53,14 @@
        </button>
     </form>
 </div>
-<div class="popup-place">
+<div class="popup popup-place">
     <form name="popup-place" class="popup__conteiner popup-place__conteiner">
         <h2 class="popup-place__title">Новое место</h2>
         <input name="input-place" class="popup__inputs popup-place__inputs_name " id="input-place" type="text" placeholder="Название" minlength="2" maxlength="30">
         <span id="input-place-error" class="error"></span>
-        <input name="input-link" class="popup__inputs popup-place__inputs_link" id="input-link" type="url" placeholder="Ссылка на картинку">
+        <input name="input-link" class="popup__inputs popup-place__inputs_link" id="input-link" type="url" placeholder="Ссылка на картинку" minlength="2">
         <span id="input-link-error" class="error"></span>
-        <button type="submit" disabled class="popup__button-save popup-place__button-save">
+        <button type="submit" disabled class="popup__button_disabled popup__button-save popup-place__button-save">
              Создать
         </button>
         <button aria-label="close" type="reset" class="popup-place__button-close">
@@ -68,7 +68,7 @@
        </button>
     </form>
 </div>
-<div class="popup__image">
+<div class="popup popup__image">
     <div class="popup__image_container">
         <button aria-label="close" type="reset" class="popup__image_button-close">
         </button>
