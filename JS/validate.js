@@ -1,59 +1,104 @@
-enableValidation({
-    formSelector: '.popup__conteiner',
-    inputSelector: '.popup__inputs',
-    submitButtonSelector: '.popup__button',
-    inactiveButtonClass: 'popup__button_disabled',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_visible'
-  });
+const optionsValidation = {
+  errorClass: '.error',
+  inputSelector: '.popup__inputs',
+  submitButtonSelector: '.popup__button-save',
+  popupButtonSaveInactive: 'popup__button_disabled',
+  formSelector: '.popup__conteiner',
+};
 
-function enableValidation(options){
-    const formElement = Array.from(document.querySelectorAll(options.formSelector));
-    formElement.forEach(formElement => {
-    const inputElements = formElement.querySelectorAll(options.inputSelector);
-    inputElements.forEach(input => {
-       input.addEventListener('input', handleInput)
-       })
-       const popapButton = Array.from(formElement.querySelectorAll('.popup__button-save'));
-       popapButton.forEach(popapButton =>{
-       formElement.addEventListener('submit', evt => {
-           evt.preventDefault()
-       })
-       formElement.addEventListener('input', () => {
-           const isFormValid = formElement.checkValidity();
-           popapButton.disabled = !isFormValid;
-           popapButton.classList.toggle(
-               options.inactiveButtonClass, !isFormValid
-       )})
-       })
-   })
+//показывает сообщение об ошибке
+function showInput(formElement, inputElement, errorMessage) {
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+  inputElement.classList.add(
+    optionsValidation.errorClass //'.error'
+  );
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add(
+    optionsValidation.errorClass //'.error'
+  );
 }
-function handleInput(evt){
-    const input = evt.target;
-    const error = document.querySelector(`#${input.id}-error`);
-    if (input.checkValidity()){
-           error.textContent = '';
-    }else{
-    error.textContent = input.validationMessage;
-    }
-   }
-  
-  
-  
-   /* const inputElements = document.querySelector('.popup-place__conteiner');
 
-   inputElements.querySelectorAll('.popup__inputs')
-        .forEach(input =>{
-                input.addEventListener('input', e =>{
-                    const inputEl = e.target;
-                    console.log(inputEl.checkValidity())
-                })
-        })
-        function enableValidation(options){
-            const formElement = document.querySelector('.popup-place__conteiner');
-            const inputElements = formElement.querySelectorAll(options.inputSelector)
-            inputElements.forEach(input => {
-               input.addEventListener('input', handleInput)
-                   
-             })
-           }*/
+//скрывает сообщения об ошибке
+function hideInput(formElement, inputElement) {
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+  inputElement.classList.remove(
+    optionsValidation.errorClass //'.error'*
+  );
+  errorElement.classList.remove(
+    optionsValidation.errorClass //'.error'*
+  );
+  errorElement.textContent = '';
+}
+
+//проверяет валидность
+function checkInputValidity(formElement, inputElement) {
+  if (!inputElement.validity.valid) {
+    showInput(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInput(formElement, inputElement);
+  }
+}
+
+// создает массив и устанавливает слушателя и изменения состояния кнопки
+function setEventListeners(formElement) {
+  const inputList = Array.from(
+    formElement.querySelectorAll(
+      optionsValidation.inputSelector //.popup__inputs
+    )
+  );
+  const buttonElement = formElement.querySelector(
+    optionsValidation.submitButtonSelector //.popup__button-save
+  );
+  toggleButtonState(inputList, buttonElement, optionsValidation.inactiveButtonClass
+  );
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', () => {
+      checkInputValidity(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement, optionsValidation.inactiveButtonClass
+      );
+    });
+  });
+}
+
+// создает массив и устанавливает слушатешлей
+function enableValidation() {
+  const formList = Array.from(
+    document.querySelectorAll(optionsValidation.formSelector /*.popup__conteiner*/)
+  );
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
+    setEventListeners(formElement);
+  });
+}
+
+// проверяет прохождение валидности
+function hasInvalidInput(inputList) {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+}
+
+const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
+  if (hasInvalidInput(inputList)) {
+    
+    buttonElement.classList.toggle(optionsValidation.popupButtonSaveInactive); //popup__button_disabled
+    buttonElement.disabled = true;
+
+  } else {
+    buttonElement.classList.remove(optionsValidation.popupButtonSaveInactive); //popup__button_disabled
+    buttonElement.disabled = false;
+  }
+}
+
+
+
+enableValidation();
+
+
+
+  
+  
+  
+ 

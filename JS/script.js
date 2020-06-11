@@ -76,11 +76,6 @@ function creatCards(e) {//функция создания новых фото
     openCloseAdd();
 }
 
-function togglePopup(popup) {//Открывает и закрывает попап
-    formElement.classList.toggle('popup_open');
-    
-}
-
 
 function delElement(ev) {//функция удаления елемента
 const deleteButton = ev.target.closest('.element__delete');
@@ -123,6 +118,7 @@ function formSubmitHandler (evt) {
     profileJob.textContent = jobInput.value;
     openClosePopup();
     
+    
 }
 //Открывает и закрывает попап "Место"
 function openCloseAdd () {
@@ -130,8 +126,9 @@ function openCloseAdd () {
     popupUrl.value = '';
     popupTitle.value = '';
     document.addEventListener('keydown', closePopupButtonEsc);
+    enableValidation();
 }
-
+//Закрывает попап кнопкой Esc
 function closePopupButtonEsc(evt) {
     if (evt.key === 'Escape') {
       document.querySelector('.popup_open').classList.remove('popup_open');
