@@ -39,11 +39,11 @@
     </template> 
 </section>
 <div class="popup">
-    <form name="popup" class="popup__conteiner" >
+    <form name="popup" class="popup__container" >
         <h2 class="popup__title">Редактировать профиль</h2>
         <input name="input-name" class="popup__inputs popup__inputs_name" type="text" id="input-name" placeholder="Имя" minlength="2" maxlength="40" autocomplete="off">
         <span id="input-name-error" class="error"></span>
-        <input name="input-job" class="popup__inputs popup__inputs_job" type="text" id="input-job" placeholder="Работа" minlength="2" maxlength="40" autocomplete="off">
+        <input name="input-job" class="popup__inputs popup__inputs_job" type="text" id="input-job" placeholder="Работа" minlength="2" maxlength="200" autocomplete="off">
         <span id="input-job-error" class="error"></span>
         <button type="submit" class="popup__button-save popup__button_disabled">
              Сохранить
@@ -54,7 +54,7 @@
     </form>
 </div>
 <div class="popup popup-place">
-    <form name="popup-place" class="popup__conteiner popup-place__conteiner">
+    <form name="popup-place" class="popup__container popup-place__container">
         <h2 class="popup-place__title">Новое место</h2>
         <input name="input-place" class="popup__inputs popup-place__inputs_name " id="input-place" type="text" placeholder="Название" required minlength="2" maxlength="30">
         <span id="input-place-error" class="error"></span>
@@ -63,18 +63,18 @@
         <button type="submit" class="popup__button-save popup-place__button-save popup__button_disabled">
              Создать
         </button>
-        <button aria-label="close" type="reset" class="popup-place__button-close">
+        <button aria-label="close" type="reset" class="popup__button-close popup-place__button-close">
             
        </button>
     </form>
 </div>
-<div class="popup popup__image">
-    <div class="popup__image_container">
-        <button aria-label="close" type="reset" class="popup__image_button-close">
+<div class="popup popup-image">
+    <div class="popup-image__container">
+        <button aria-label="close" type="reset" class="popup__button-close popup-image__button-close">
         </button>
-        <figure class="popup__image_figure">
-            <img class="popup__image_src" src="." alt=".">
-            <p class="popup__image_text"></p>
+        <figure class="popup-image__figure">
+            <img class="popup-image__src" src="." alt=".">
+            <p class="popup-image__text"></p>
         </figure>
   
     </div>

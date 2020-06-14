@@ -38,59 +38,50 @@ const popupUrl = document.querySelector('.popup-place__inputs_link');//ссыл�
 const popupTitle = document.querySelector('.popup-place__inputs_name');//текс фото
 const elements = document.querySelector(".elements") //шаблон
 const elementsTemplate = document.querySelector('.cardTemplate').content; //template
-const imagePopup = document.querySelector('.popup__image');//для функции добавления фото
-const imagePopupSrc = document.querySelector('.popup__image_src');//для функции добавления фото_ссылка
-const imagePopupText = document.querySelector('.popup__image_text');//для функции добавления фото_текст
-const imgClose = document.querySelector('.popup__image_button-close');//кнопка закрытия фото
+const imagePopup = document.querySelector('.popup-image');//для функции добавления фото
+const imagePopupSrc = document.querySelector('.popup-image__src');//для функции добавления фото_ссылка
+const imagePopupText = document.querySelector('.popup-image__text');//для функции добавления фото_текст
+const imgClose = document.querySelector('.popup-image__button-close');//кнопка закрытия фото
 
-function addCard(item) {
+function addCard(link, name) {
     const element = elementsTemplate.cloneNode(true); //копируем заготовку
-    const elementImage = element.querySelector(".element__image"); //поле image
-    const elementTitle = element.querySelector(".element__title"); //поле title
-    elementImage.src = item.link;//вставляем ссылку из массива фото
-    elementImage.alt = item.name; //вставляем описание фото
-    elementTitle.textContent = item.name; //вставляем текст из массива
-    elements.prepend(element);
+    element.querySelector(".element__image").src = link; //поле image
+    element.querySelector(".element__title").textContent = name; //поле title
+    element.querySelector('.element__image').alt = name; //вставляем описание фото
+    //elements.addEventListener('click', addLike);
+    element.querySelector('.element__heart').addEventListener('click', addLike);
+    element.querySelector('.element__delete').addEventListener('click', delElement);
+    //element.querySelector('.element__image').addEventListener('click', openCloseImg);
+    //elements.addEventListener('click', delElement);
+    imgClose.addEventListener('click', openCloseImg);
+    return element;
 }
 
-function render(){//функция перебора массива
-    initialCards.forEach(addCard)
+//функция перебора массива
+function render(initialCards, arrayElement) {
+    initialCards.forEach((element) => {
+        arrayElement.prepend(addCard(element.link, element.name));
+    });
 }
 
-render();//вызов функции добавления скопированных елементов
+render(initialCards, elements);//вызов функции добавления скопированных елементов
 
 function creatCards(e) {//функция создания новых фото
     e.preventDefault(); //отмена отправки формы
-    const elementTemplate = document.querySelector(".cardTemplate").content; //находим заготовку
-    const element = elementTemplate.cloneNode(true); //копируем заготовку
-
-    const elementImage = element.querySelector(".element__image"); //поле image
-    const elementTitle = element.querySelector(".element__title"); //поле title 
-
-    elementImage.src = popupUrl.value; //вставляем ссылку из поля popup
-    elementImage.alt = popupTitle.value
-    elementTitle.textContent = popupTitle.value; //вставляем текст из поля popup
-
-    elements.prepend(element);//помещаем фото в начало списка
-
+    elements.prepend(addCard(popupUrl.value, popupTitle.value));//помещаем фото в начало списка
     openCloseAdd();
 }
 
 
 function delElement(ev) {//функция удаления елемента
-const deleteButton = ev.target.closest('.element__delete');
-  
-if (deleteButton)  {
-    deleteButton.closest('.element').remove()
-}
+    ev.target.closest('.element').remove();
+
 }
 
 function addLike(ev) {//функция добавления лайка
-    const buttonLike = ev.target.closest('.element__heart');
-    if (buttonLike) {
-        buttonLike.classList.toggle('element__heart_on');
-    }
-  }
+    ev.target.classList.toggle('element__heart_on');
+}
+
 
 function openPhoto(event) {//открыть фото
     const popupImage = event.target.closest('.element__image');
@@ -99,12 +90,12 @@ function openPhoto(event) {//открыть фото
         imagePopupSrc.src = popupImage.src;
         imagePopupText.textContent = popupImage.alt;
         document.addEventListener('keydown', closePopupButtonEsc);
-        
+
     }
 }
-  
+
 //Открывает и закрывает попап редактирования профиля
-function openClosePopup () {
+function openClosePopup(evt) {
     formElement.classList.toggle('popup_open');
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
@@ -112,16 +103,16 @@ function openClosePopup () {
 }
 
 //функция присвоения введенных данных в окне "Попап" для соответствующего поля
-function formSubmitHandler (evt) {
-    evt.preventDefault();   
+function formSubmitHandler(evt) {
+    evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
     openClosePopup();
-    
-    
+
+
 }
 //Открывает и закрывает попап "Место"
-function openCloseAdd () {
+function openCloseAdd() {
     addPlaceButton.classList.toggle('popup_open');
     popupUrl.value = '';
     popupTitle.value = '';
@@ -131,32 +122,32 @@ function openCloseAdd () {
 //Закрывает попап кнопкой Esc
 function closePopupButtonEsc(evt) {
     if (evt.key === 'Escape') {
-      document.querySelector('.popup_open').classList.remove('popup_open');
-      document.removeEventListener('keydown', closePopupButtonEsc);
+        document.querySelector('.popup_open').classList.remove('popup_open');
+        document.removeEventListener('keydown', closePopupButtonEsc);
     }
-  }
+}
 
-  
-  function mouseClick(evt) { // клик на оверлей                
+
+function mouseClick(evt) { // клик на оверлей                
     if (evt.target.classList.contains('popup')) {
         formElement.classList.remove('popup_open');
     }
-    if (evt.target.classList.contains('popup__image')) {
+    if (evt.target.classList.contains('popup-image')) {
         imagePopup.classList.remove('popup_open');
     }
     if (evt.target.classList.contains('popup-place')) {
         addPlaceButton.classList.remove('popup_open');
     }
-  }
-
- 
-
-
-function openCloseImg () {//Открывает и закрывает попап "Фото"
-    imagePopup.classList.toggle('popup_open');
-    
 }
-//formElement.addEventListener('click', mouseClick);
+
+
+
+
+function openCloseImg() {//Открывает и закрывает попап "Фото"
+    imagePopup.classList.toggle('popup_open');
+
+}
+
 
 //кнопка "редактирование"
 editProfile.addEventListener('click', openClosePopup);
@@ -168,16 +159,16 @@ formElement.addEventListener('submit', formSubmitHandler);
 addImage.addEventListener('click', openCloseAdd);
 addClose.addEventListener('click', openCloseAdd);
 //закрывает попап "Фото"
-imgClose.addEventListener('click', openCloseImg);
+//imgClose.addEventListener('click', openCloseImg);
 //сохраняет новое фото
 addPlaceButton.addEventListener('submit', creatCards);
 //ставит лайк
-elements.addEventListener('click', addLike);
+//elements.addEventListener('click', addLike);
 //удаляет элемент
-elements.addEventListener('click', delElement);
+//elements.addEventListener('click', delElement);
 //открывает фото
 elements.addEventListener('click', openPhoto);
 document.querySelectorAll('.popup').forEach((popupElement) => {
     popupElement.addEventListener('click', mouseClick);
-  });
+});
 
