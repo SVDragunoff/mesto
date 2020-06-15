@@ -46,13 +46,13 @@ function setEventListeners(formElement) {
 }
 
 // создает массив и устанавливает слушатешлей
-function enableValidation() {
+function enableValidation(optionsValidation) {
   const formList = Array.from(document.querySelectorAll(optionsValidation.formSelector)); //.popup__container
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
-    setEventListeners(formElement);
+    setEventListeners(formElement, optionsValidation);
   });
 }
 
@@ -65,7 +65,7 @@ function hasInvalidInput(inputList) {
 
 const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
   if (hasInvalidInput(inputList)) {
-    
+
     buttonElement.classList.toggle(optionsValidation.popupButtonSaveInactive); //popup__button_disabled
     buttonElement.disabled = true;
 
@@ -81,7 +81,6 @@ enableValidation(optionsValidation);
 
 
 
-  
-  
-  
- 
+
+
+

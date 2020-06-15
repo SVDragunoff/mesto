@@ -53,7 +53,7 @@ function addCard(link, name) {
     elementTitle.textContent = name; //вставляем текст из массива
     element.querySelector('.element__heart').addEventListener('click', addLike);
     element.querySelector('.element__delete').addEventListener('click', delElement);
-    elements.addEventListener('click', openPhoto);
+    element.querySelector('.element__image').addEventListener('click', openPhoto);
     return element;
 }
 
@@ -68,14 +68,14 @@ render(initialCards, elements);//вызов функции добавления 
 
 function openPopup(elem) {//открывает попап
     elem.classList.add('popup_open');
-    imagePopup.addEventListener('click', mouseClick);
+    elem.addEventListener('click', mouseClick);
     document.addEventListener('keydown', closePopupButtonEsc);
 }
 
 function closePopup(elem) {//закрывает попап
-    elem.classList.remove('popup_open')
+    elem.classList.remove('popup_open');
     document.removeEventListener('keydown', closePopupButtonEsc);
-    imagePopup.removeEventListener('click', mouseClick);
+    elem.removeEventListener('click', mouseClick);
 }
 
 function closeButtonCross(evt) {//кнопка "крест" в попапах редактирования профиля и место
@@ -92,16 +92,10 @@ function addLike(ev) {//функция добавления лайка
     ev.target.classList.toggle('element__heart_on');
 }
 
-function openPhoto(event) {//открыть фото
-    const popupImage = event.target.closest('.element__image');
-    
-    if (popupImage) {
-        openPopup(imagePopup);
-        imagePopupSrc.src = popupImage.src;
-        imagePopupText.textContent = popupImage.alt;
-        imgClose.addEventListener('click', closeButtonCross);
-        document.addEventListener('keydown', closePopupButtonEsc);
-    }
+function openPhoto(evt) {//открыть фото
+    openPopup(imagePopup);
+    imagePopupSrc.src = evt.target.src;
+    imagePopupText.textContent = evt.target.alt;
 }
 
 //Открывает и закрывает попап редактирования профиля
@@ -109,10 +103,7 @@ function openProfile() {
     openPopup(formElement);
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
-    document.addEventListener('keydown', closePopupButtonEsc);
-    formElement.addEventListener('click', mouseClick);
 }
-
 //функция присвоения введенных данных в окне "Попап" для соответствующего поля
 function formSubmitHandler(evt) {
     evt.preventDefault();
@@ -125,27 +116,22 @@ function openAdd() {
     openPopup(addPlaceButton);
     popupUrl.value = '';
     popupTitle.value = '';
-    addPlaceButton.addEventListener('click', mouseClick);
-    enableValidation();
+    enableValidation(optionsValidation);
 }
-
 function creatCards(e) {//функция создания новых фото
     e.preventDefault(); //отмена отправки формы
     elements.prepend(addCard(popupUrl.value, popupTitle.value));//помещаем фото в начало списка
     closePopup(addPlaceButton);
 }
-
 //Закрывает попап кнопкой Esc
 function closePopupButtonEsc(evt) {
     if (evt.key === 'Escape') {
-        document.querySelector('.popup_open').classList.remove('popup_open');
-        closePopup(evt.target)
+        closePopup(document.querySelector('.popup_open'))
     }
 }
 
-
 function mouseClick(evt) { // клик на оверлей 
-    closePopup(evt.target)           
+    closePopup(evt.target)
 }
 
 //кнопка "редактирование"
@@ -160,6 +146,8 @@ addImage.addEventListener('click', openAdd);
 addClose.addEventListener('click', closeButtonCross);
 //сохраняет новое фото
 addPlaceButton.addEventListener('submit', creatCards);
+//кновка "крест" закрывает изображение
+imgClose.addEventListener('click', closeButtonCross);
 
 
 
