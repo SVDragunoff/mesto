@@ -7,3 +7,9 @@
     margin-left:36px;
     margin-bottom:0;
   }
+ @media (max-width : 450px){
+.popup__title{
+  font-size: 24px;
+  line-height: 29px;
+      }
+    }

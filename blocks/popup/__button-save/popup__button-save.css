@@ -8,8 +8,18 @@
   color: white;
   border-radius: 2px;
   border: 0;
+  font-size: 18px;
+  line-height: 22px;
 }
 .popup__button-save:hover{
   background: rgba(0, 0, 0, 0.8);
   
 }
+@media (max-width : 450px){
+.popup__button-save{
+  width: 200px;
+  height: 40px;
+  font-size: 14px;
+  line-height: 17px;
+          }
+      }

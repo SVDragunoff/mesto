@@ -1,7 +1,7 @@
 .popup__container{
   background-color: rgba(255, 255, 255, 1);
   max-width: 430px;
-  height: 35%;
+  max-height: 330px;
   width: 80%;
   position: relative;
   display: flex;
@@ -9,12 +9,13 @@
   justify-content: space-evenly;
   border-radius: 10px;
   margin-top: 190px;
+  padding-bottom: 25px;
 
 }
 @media (max-width : 450px){
 .popup__container{
-  width: 86%;
-  height: 35%;
+  width: 240px;
+  height: 258px;
   margin-top: 155px;
         }
     }

@@ -42,16 +42,18 @@ const imagePopup = document.querySelector('.popup-image');//для функци�
 const imagePopupSrc = document.querySelector('.popup-image__src');//для функции добавления фото_ссылка
 const imagePopupText = document.querySelector('.popup-image__text');//для функции добавления фото_текст
 const imgClose = document.querySelector('.popup-image__button-close');//кнопка закрытия фото
-const popups = document.querySelector('.popups');
+
 
 function addCard(link, name) {
     const element = elementsTemplate.cloneNode(true); //копируем заготовку
-    element.querySelector(".element__image").src = link; //поле image
-    element.querySelector(".element__title").textContent = name; //поле title
-    element.querySelector('.element__image').alt = name; //вставляем описание фото
+    const elementImage = element.querySelector(".element__image"); //поле image
+    const elementTitle = element.querySelector(".element__title"); //поле title
+    elementImage.src = link;//вставляем ссылку из массива фото
+    elementImage.alt = name; //вставляем описание фото
+    elementTitle.textContent = name; //вставляем текст из массива
     element.querySelector('.element__heart').addEventListener('click', addLike);
     element.querySelector('.element__delete').addEventListener('click', delElement);
-    imgClose.addEventListener('click', closeButtonCross);
+    elements.addEventListener('click', openPhoto);
     return element;
 }
 
@@ -65,13 +67,15 @@ function render(initialCards, arrayElement) {
 render(initialCards, elements);//вызов функции добавления скопированных елементов
 
 function openPopup(elem) {//открывает попап
-    elem.classList.add('popup_open')
+    elem.classList.add('popup_open');
+    imagePopup.addEventListener('click', mouseClick);
     document.addEventListener('keydown', closePopupButtonEsc);
 }
 
 function closePopup(elem) {//закрывает попап
     elem.classList.remove('popup_open')
     document.removeEventListener('keydown', closePopupButtonEsc);
+    imagePopup.removeEventListener('click', mouseClick);
 }
 
 function closeButtonCross(evt) {//кнопка "крест" в попапах редактирования профиля и место
@@ -90,11 +94,12 @@ function addLike(ev) {//функция добавления лайка
 
 function openPhoto(event) {//открыть фото
     const popupImage = event.target.closest('.element__image');
-    imagePopup.addEventListener('click', mouseClick);
+    
     if (popupImage) {
         openPopup(imagePopup);
         imagePopupSrc.src = popupImage.src;
         imagePopupText.textContent = popupImage.alt;
+        imgClose.addEventListener('click', closeButtonCross);
         document.addEventListener('keydown', closePopupButtonEsc);
     }
 }
@@ -120,7 +125,6 @@ function openAdd() {
     openPopup(addPlaceButton);
     popupUrl.value = '';
     popupTitle.value = '';
-    document.addEventListener('keydown', closePopupButtonEsc);
     addPlaceButton.addEventListener('click', mouseClick);
     enableValidation();
 }
@@ -135,21 +139,13 @@ function creatCards(e) {//функция создания новых фото
 function closePopupButtonEsc(evt) {
     if (evt.key === 'Escape') {
         document.querySelector('.popup_open').classList.remove('popup_open');
-        document.removeEventListener('keydown', closePopupButtonEsc);
+        closePopup(evt.target)
     }
 }
 
 
-function mouseClick(evt) { // клик на оверлей                
-    if (evt.target.classList.contains('popup')) {
-        formElement.classList.remove('popup_open');
-    }
-    if (evt.target.classList.contains('popup-image')) {
-        imagePopup.classList.remove('popup_open');
-    }
-    if (evt.target.classList.contains('popup-place')) {
-        addPlaceButton.classList.remove('popup_open');
-    }
+function mouseClick(evt) { // клик на оверлей 
+    closePopup(evt.target)           
 }
 
 //кнопка "редактирование"
@@ -164,7 +160,7 @@ addImage.addEventListener('click', openAdd);
 addClose.addEventListener('click', closeButtonCross);
 //сохраняет новое фото
 addPlaceButton.addEventListener('submit', creatCards);
-//открывает фото
-elements.addEventListener('click', openPhoto);
+
+
 
 
