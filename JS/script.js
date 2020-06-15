@@ -42,18 +42,16 @@ const imagePopup = document.querySelector('.popup-image');//для функци�
 const imagePopupSrc = document.querySelector('.popup-image__src');//для функции добавления фото_ссылка
 const imagePopupText = document.querySelector('.popup-image__text');//для функции добавления фото_текст
 const imgClose = document.querySelector('.popup-image__button-close');//кнопка закрытия фото
+const popups = document.querySelector('.popups');
 
 function addCard(link, name) {
     const element = elementsTemplate.cloneNode(true); //копируем заготовку
     element.querySelector(".element__image").src = link; //поле image
     element.querySelector(".element__title").textContent = name; //поле title
     element.querySelector('.element__image').alt = name; //вставляем описание фото
-    //elements.addEventListener('click', addLike);
     element.querySelector('.element__heart').addEventListener('click', addLike);
     element.querySelector('.element__delete').addEventListener('click', delElement);
-    //element.querySelector('.element__image').addEventListener('click', openCloseImg);
-    //elements.addEventListener('click', delElement);
-    imgClose.addEventListener('click', openCloseImg);
+    imgClose.addEventListener('click', closeButtonCross);
     return element;
 }
 
@@ -66,40 +64,48 @@ function render(initialCards, arrayElement) {
 
 render(initialCards, elements);//вызов функции добавления скопированных елементов
 
-function creatCards(e) {//функция создания новых фото
-    e.preventDefault(); //отмена отправки формы
-    elements.prepend(addCard(popupUrl.value, popupTitle.value));//помещаем фото в начало списка
-    openCloseAdd();
+function openPopup(elem) {//открывает попап
+    elem.classList.add('popup_open')
+    document.addEventListener('keydown', closePopupButtonEsc);
 }
 
+function closePopup(elem) {//закрывает попап
+    elem.classList.remove('popup_open')
+    document.removeEventListener('keydown', closePopupButtonEsc);
+}
+
+function closeButtonCross(evt) {//кнопка "крест" в попапах редактирования профиля и место
+    if (evt.target.classList.contains('popup__button-close')) {
+        document.querySelector('.popup_open').classList.remove('popup_open');
+    }
+}
 
 function delElement(ev) {//функция удаления елемента
     ev.target.closest('.element').remove();
-
 }
 
 function addLike(ev) {//функция добавления лайка
     ev.target.classList.toggle('element__heart_on');
 }
 
-
 function openPhoto(event) {//открыть фото
     const popupImage = event.target.closest('.element__image');
+    imagePopup.addEventListener('click', mouseClick);
     if (popupImage) {
-        openCloseImg(imagePopup);
+        openPopup(imagePopup);
         imagePopupSrc.src = popupImage.src;
         imagePopupText.textContent = popupImage.alt;
         document.addEventListener('keydown', closePopupButtonEsc);
-
     }
 }
 
 //Открывает и закрывает попап редактирования профиля
-function openClosePopup(evt) {
-    formElement.classList.toggle('popup_open');
+function openProfile() {
+    openPopup(formElement);
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
     document.addEventListener('keydown', closePopupButtonEsc);
+    formElement.addEventListener('click', mouseClick);
 }
 
 //функция присвоения введенных данных в окне "Попап" для соответствующего поля
@@ -107,18 +113,24 @@ function formSubmitHandler(evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
-    openClosePopup();
-
-
+    closePopup(formElement);
 }
 //Открывает и закрывает попап "Место"
-function openCloseAdd() {
-    addPlaceButton.classList.toggle('popup_open');
+function openAdd() {
+    openPopup(addPlaceButton);
     popupUrl.value = '';
     popupTitle.value = '';
     document.addEventListener('keydown', closePopupButtonEsc);
+    addPlaceButton.addEventListener('click', mouseClick);
     enableValidation();
 }
+
+function creatCards(e) {//функция создания новых фото
+    e.preventDefault(); //отмена отправки формы
+    elements.prepend(addCard(popupUrl.value, popupTitle.value));//помещаем фото в начало списка
+    closePopup(addPlaceButton);
+}
+
 //Закрывает попап кнопкой Esc
 function closePopupButtonEsc(evt) {
     if (evt.key === 'Escape') {
@@ -140,35 +152,19 @@ function mouseClick(evt) { // клик на оверлей
     }
 }
 
-
-
-
-function openCloseImg() {//Открывает и закрывает попап "Фото"
-    imagePopup.classList.toggle('popup_open');
-
-}
-
-
 //кнопка "редактирование"
-editProfile.addEventListener('click', openClosePopup);
-//кнопка "крест"
-closeProfile.addEventListener('click', openClosePopup);
-//кновка "сохранить"
+editProfile.addEventListener('click', openProfile);
+//кнопка "крест" editProfile
+closeProfile.addEventListener('click', closeButtonCross);
+//кнопка "сохранить"
 formElement.addEventListener('submit', formSubmitHandler);
 //открывает и закрывает попоап "Место"
-addImage.addEventListener('click', openCloseAdd);
-addClose.addEventListener('click', openCloseAdd);
-//закрывает попап "Фото"
-//imgClose.addEventListener('click', openCloseImg);
+addImage.addEventListener('click', openAdd);
+//кнопка "крест" place
+addClose.addEventListener('click', closeButtonCross);
 //сохраняет новое фото
 addPlaceButton.addEventListener('submit', creatCards);
-//ставит лайк
-//elements.addEventListener('click', addLike);
-//удаляет элемент
-//elements.addEventListener('click', delElement);
 //открывает фото
 elements.addEventListener('click', openPhoto);
-document.querySelectorAll('.popup').forEach((popupElement) => {
-    popupElement.addEventListener('click', mouseClick);
-});
+
 
