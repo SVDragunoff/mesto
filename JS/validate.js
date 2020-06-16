@@ -36,11 +36,11 @@ function checkInputValidity(formElement, inputElement, optionsValidation) {
 function setEventListeners(formElement, optionsValidation) {
   const inputList = Array.from(formElement.querySelectorAll(optionsValidation.inputSelector)); //.popup__inputs
   const buttonElement = formElement.querySelector(optionsValidation.submitButtonSelector); //.popup__button-save
-  toggleButtonState(inputList, buttonElement, optionsValidation.inactiveButtonClass);
+  toggleButtonState(inputList, buttonElement, optionsValidation);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       checkInputValidity(formElement, inputElement, optionsValidation);
-      toggleButtonState(inputList, buttonElement, optionsValidation.inactiveButtonClass);
+      toggleButtonState(inputList, buttonElement, optionsValidation);
     });
   });
 }
@@ -63,7 +63,7 @@ function hasInvalidInput(inputList) {
   });
 }
 
-const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
+const toggleButtonState = (inputList, buttonElement, optionsValidation) => {
   if (hasInvalidInput(inputList)) {
 
     buttonElement.classList.add(optionsValidation.popupButtonSaveInactive); //popup__button_disabled
