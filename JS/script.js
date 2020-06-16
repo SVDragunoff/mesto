@@ -67,9 +67,9 @@ function render(initialCards, arrayElement) {
 render(initialCards, elements);//вызов функции добавления скопированных елементов
 
 function openPopup(elem) {//открывает попап
-    elem.classList.add('popup_open');
     elem.addEventListener('click', mouseClick);
     document.addEventListener('keydown', closePopupButtonEsc);
+    elem.classList.add('popup_open');
 }
 
 function closePopup(elem) {//закрывает попап
@@ -116,7 +116,6 @@ function openAdd() {
     openPopup(addPlaceButton);
     popupUrl.value = '';
     popupTitle.value = '';
-    enableValidation(optionsValidation);
 }
 function creatCards(e) {//функция создания новых фото
     e.preventDefault(); //отмена отправки формы

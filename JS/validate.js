@@ -7,7 +7,7 @@ const optionsValidation = {
 };
 
 //показывает сообщение об ошибке
-function showInput(formElement, inputElement, errorMessage) {
+function showInput(formElement, inputElement, errorMessage, optionsValidation) {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.add(optionsValidation.errorClass); //'.error'
   errorElement.textContent = errorMessage;
@@ -16,7 +16,7 @@ function showInput(formElement, inputElement, errorMessage) {
 }
 
 //скрывает сообщения об ошибке
-function hideInput(formElement, inputElement) {
+function hideInput(formElement, inputElement, optionsValidation) {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.remove(optionsValidation.errorClass); //'.error'
   errorElement.classList.remove(optionsValidation.errorClass); //'.error'
@@ -24,22 +24,22 @@ function hideInput(formElement, inputElement) {
 }
 
 //проверяет валидность
-function checkInputValidity(formElement, inputElement) {
+function checkInputValidity(formElement, inputElement, optionsValidation) {
   if (!inputElement.validity.valid) {
-    showInput(formElement, inputElement, inputElement.validationMessage);
+    showInput(formElement, inputElement, inputElement.validationMessage, optionsValidation);
   } else {
-    hideInput(formElement, inputElement);
+    hideInput(formElement, inputElement, optionsValidation);
   }
 }
 
 // создает массив и устанавливает слушателя и изменения состояния кнопки
-function setEventListeners(formElement) {
+function setEventListeners(formElement, optionsValidation) {
   const inputList = Array.from(formElement.querySelectorAll(optionsValidation.inputSelector)); //.popup__inputs
   const buttonElement = formElement.querySelector(optionsValidation.submitButtonSelector); //.popup__button-save
   toggleButtonState(inputList, buttonElement, optionsValidation.inactiveButtonClass);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      checkInputValidity(formElement, inputElement);
+      checkInputValidity(formElement, inputElement, optionsValidation);
       toggleButtonState(inputList, buttonElement, optionsValidation.inactiveButtonClass);
     });
   });
@@ -66,7 +66,7 @@ function hasInvalidInput(inputList) {
 const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
   if (hasInvalidInput(inputList)) {
 
-    buttonElement.classList.toggle(optionsValidation.popupButtonSaveInactive); //popup__button_disabled
+    buttonElement.classList.add(optionsValidation.popupButtonSaveInactive); //popup__button_disabled
     buttonElement.disabled = true;
 
   } else {
