@@ -1,3 +1,4 @@
+import { Card } from './Card.js';
 const initialCards = [//массив с фото и наименованием
     {
         name: 'Архыз',
@@ -37,36 +38,20 @@ const addClose = document.querySelector('.popup-place__button-close');//кноп
 const popupUrl = document.querySelector('.popup-place__inputs_link');//ссылка на фото
 const popupTitle = document.querySelector('.popup-place__inputs_name');//текс фото
 const elements = document.querySelector(".elements") //шаблон
-const elementsTemplate = document.querySelector('.cardTemplate').content; //template
-const imagePopup = document.querySelector('.popup-image');//для функции добавления фото
-const imagePopupSrc = document.querySelector('.popup-image__src');//для функции добавления фото_ссылка
-const imagePopupText = document.querySelector('.popup-image__text');//для функции добавления фото_текст
+
 const imgClose = document.querySelector('.popup-image__button-close');//кнопка закрытия фото
 
 
-function addCard(link, name) {
-    const element = elementsTemplate.cloneNode(true); //копируем заготовку
-    const elementImage = element.querySelector(".element__image"); //поле image
-    const elementTitle = element.querySelector(".element__title"); //поле title
-    elementImage.src = link;//вставляем ссылку из массива фото
-    elementImage.alt = name; //вставляем описание фото
-    elementTitle.textContent = name; //вставляем текст из массива
-    element.querySelector('.element__heart').addEventListener('click', addLike);
-    element.querySelector('.element__delete').addEventListener('click', delElement);
-    element.querySelector('.element__image').addEventListener('click', openPhoto);
-    return element;
-}
-
-//функция перебора массива
-function render(initialCards, arrayElement) {
     initialCards.forEach((element) => {
-        arrayElement.prepend(addCard(element.link, element.name));
-    });
-}
+        const card = new Card(element.link, element.name,'.cardTemplate' );
+        const cardElement = card.addCard();
+        elements.prepend(cardElement);
+    })
 
-render(initialCards, elements);//вызов функции добавления скопированных елементов
 
-function openPopup(elem) {//открывает попап
+//render(initialCards, elements);//вызов функции добавления скопированных елементов
+
+export function openPopup(elem) {//открывает попап
     elem.addEventListener('click', mouseClick);
     document.addEventListener('keydown', closePopupButtonEsc);
     elem.classList.add('popup_open');
@@ -82,20 +67,6 @@ function closeButtonCross(evt) {//кнопка "крест" в попапах р
     if (evt.target.classList.contains('popup__button-close')) {
         document.querySelector('.popup_open').classList.remove('popup_open');
     }
-}
-
-function delElement(ev) {//функция удаления елемента
-    ev.target.closest('.element').remove();
-}
-
-function addLike(ev) {//функция добавления лайка
-    ev.target.classList.toggle('element__heart_on');
-}
-
-function openPhoto(evt) {//открыть фото
-    openPopup(imagePopup);
-    imagePopupSrc.src = evt.target.src;
-    imagePopupText.textContent = evt.target.alt;
 }
 
 //Открывает и закрывает попап редактирования профиля
@@ -119,7 +90,7 @@ function openAdd() {
 }
 function creatCards(e) {//функция создания новых фото
     e.preventDefault(); //отмена отправки формы
-    elements.prepend(addCard(popupUrl.value, popupTitle.value));//помещаем фото в начало списка
+    elements.prepend(new Card (popupUrl.value, popupTitle.value, '.cardTemplate').addCard());//помещаем фото в начало списка
     closePopup(addPlaceButton);
 }
 //Закрывает попап кнопкой Esc
