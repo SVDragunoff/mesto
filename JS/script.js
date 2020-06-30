@@ -1,4 +1,5 @@
 import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
 const initialCards = [//массив с фото и наименованием
     {
         name: 'Архыз',
@@ -25,6 +26,13 @@ const initialCards = [//массив с фото и наименованием
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
+const optionsValidation = {
+    errorClass: '.error',
+    inputSelector: '.popup__inputs',
+    submitButtonSelector: '.popup__button-save',
+    popupButtonSaveInactive: 'popup__button_disabled',
+    formSelector: '.popup__container',
+};
 const editProfile = document.querySelector('.profile__info-button');//кнопка редактирования профиля
 const closeProfile = document.querySelector('.popup__button-close');//кнопка закрытия окна редактирования профиля
 const formElement = document.querySelector('.popup');//попап
@@ -41,26 +49,32 @@ const elements = document.querySelector(".elements") //шаблон
 
 const imgClose = document.querySelector('.popup-image__button-close');//кнопка закрытия фото
 
+const editProfileValid = new FormValidator(formElement, optionsValidation);
+const placeFormValid = new FormValidator(addPlaceButton, optionsValidation);
+editProfileValid.enableValidation();
+placeFormValid.enableValidation();
 
-    initialCards.forEach((element) => {
-        const card = new Card(element.link, element.name,'.cardTemplate' );
-        const cardElement = card.addCard();
-        elements.prepend(cardElement);
-    })
+initialCards.forEach((element) => {
+    const card = new Card(element.link, element.name, '.cardTemplate');
+    const cardElement = card.addCard();
+    elements.prepend(cardElement);
+})
 
-
-//render(initialCards, elements);//вызов функции добавления скопированных елементов
 
 export function openPopup(elem) {//открывает попап
     elem.addEventListener('click', mouseClick);
     document.addEventListener('keydown', closePopupButtonEsc);
     elem.classList.add('popup_open');
+    
+    
 }
 
 function closePopup(elem) {//закрывает попап
     elem.classList.remove('popup_open');
     document.removeEventListener('keydown', closePopupButtonEsc);
     elem.removeEventListener('click', mouseClick);
+    
+    
 }
 
 function closeButtonCross(evt) {//кнопка "крест" в попапах редактирования профиля и место
@@ -90,7 +104,7 @@ function openAdd() {
 }
 function creatCards(e) {//функция создания новых фото
     e.preventDefault(); //отмена отправки формы
-    elements.prepend(new Card (popupUrl.value, popupTitle.value, '.cardTemplate').addCard());//помещаем фото в начало списка
+    elements.prepend(new Card(popupUrl.value, popupTitle.value, '.cardTemplate').addCard());//помещаем фото в начало списка
     closePopup(addPlaceButton);
 }
 //Закрывает попап кнопкой Esc
