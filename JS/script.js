@@ -26,6 +26,7 @@ const initialCards = [//массив с фото и наименованием
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
+//Массив для класса FormValidator
 const optionsValidation = {
     errorClass: '.error',
     inputSelector: '.popup__inputs',
@@ -65,7 +66,7 @@ export function openPopup(elem) {//открывает попап
     elem.addEventListener('click', mouseClick);
     document.addEventListener('keydown', closePopupButtonEsc);
     elem.classList.add('popup_open');
-    
+    //editProfileValid.clearErrors()
     
 }
 
@@ -96,11 +97,13 @@ function formSubmitHandler(evt) {
     profileJob.textContent = jobInput.value;
     closePopup(formElement);
 }
-//Открывает и закрывает попап "Место"
+//Открывает попап "Место"
 function openAdd() {
     openPopup(addPlaceButton);
     popupUrl.value = '';
     popupTitle.value = '';
+    editProfileValid.clearErrors()
+    
 }
 function creatCards(e) {//функция создания новых фото
     e.preventDefault(); //отмена отправки формы

@@ -21,6 +21,15 @@ _hideInput(inputElement) {
   errorElement.textContent = '';
 }
 
+//Очищает форму
+clearErrors() {
+  this._inputs = Array.from(this._formElement.querySelectorAll(this._optionsValidation.inputSelector));
+  const buttonElement = this._formElement.querySelector(this._optionsValidation.submitButtonSelector);
+  this._inputs.forEach(inputElement => this._hideInput(inputElement));
+  this._toggleButtonState(this._inputs,buttonElement);
+  //this._formElement.reset();
+ }
+
 //проверяет валидность
 _checkInputValidity(inputElement) {
   if (!inputElement.validity.valid) {
@@ -34,11 +43,11 @@ _checkInputValidity(inputElement) {
 _setEventListeners = () => {
   const inputList = Array.from(this._formElement.querySelectorAll(this._optionsValidation.inputSelector)); //.popup__inputs
   const buttonElement = this._formElement.querySelector(this._optionsValidation.submitButtonSelector); //.popup__button-save
-  this._toggleButtonState(inputList, buttonElement, this._optionsValidation);
+  this._toggleButtonState(inputList, buttonElement, this._optionsValidation.popupButtonSaveInactive);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       this._checkInputValidity(inputElement, this._optionsValidation);
-      this._toggleButtonState(inputList, buttonElement, this._optionsValidation);
+      this._toggleButtonState(inputList, buttonElement, this._optionsValidation.popupButtonSaveInactive);
     });
   });
 }
@@ -54,15 +63,15 @@ _hasInvalidInput(inputList) {
     return !inputElement.validity.valid;
   });
 }
-
-_toggleButtonState = (inputList, buttonElement, optionsValidation) => {
+//Изменяет состояние кнопки
+_toggleButtonState = (inputList, buttonElement) => {
   if (this._hasInvalidInput(inputList)) {
     
-    buttonElement.classList.add(optionsValidation.popupButtonSaveInactive); //popup__button_disabled
+    buttonElement.classList.add(this._optionsValidation.popupButtonSaveInactive); //popup__button_disabled
     buttonElement.disabled = true;
 
   } else {
-    buttonElement.classList.remove(optionsValidation.popupButtonSaveInactive); //popup__button_disabled
+    buttonElement.classList.remove(this._optionsValidation.popupButtonSaveInactive); //popup__button_disabled
     buttonElement.disabled = false;
   }
 }
