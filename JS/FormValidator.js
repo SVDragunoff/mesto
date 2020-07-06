@@ -1,7 +1,15 @@
+
 export class FormValidator{
   constructor(formElement, optionsValidation) {
     this._formElement = formElement;
-    this._optionsValidation = optionsValidation;      
+    this._optionsValidation = optionsValidation;
+    
+    this._errorClass = this._formElement.errorClass;
+    this._inputSelector = this._formElement.inputSelector;
+    this._submitButtonSelector = this._formElement.submitButtonSelector;
+    this._popupButtonSaveInactive = this._formElement.popupButtonSaveInactive;
+    this._formSelector = this._formElement.formSelector;
+
 }
 
 //показывает сообщение об ошибке
@@ -54,7 +62,7 @@ _setEventListeners = () => {
 
 //устанавливает слушателей
 enableValidation = () => {      
-  this._setEventListeners(this._optionsValidation);
+  this._setEventListeners();
 }
 
 // проверяет прохождение валидности

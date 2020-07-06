@@ -1,11 +1,11 @@
-import { openPopup } from './script.js';
-export class Card {
-    //static elementsTemplate = document.querySelector('.cardTemplate').content;
+import { openPopup } from './utils.js';
+export default class Card {
     constructor(link, name, cardSelector) {
         this._link = link;
         this._name = name;
         this._cardSelector = cardSelector;
     }
+    //копирует Template елемент
     _getTemplate() {
         const cardElement = document.querySelector(this._cardSelector)
             .content
@@ -14,8 +14,8 @@ export class Card {
 
         return cardElement;
     }
-    addCard() {
-
+    //добавляет карточки из массива и вешает слушатели
+    creatElement() {
         this._element = this._getTemplate(); //копируем заготовку
         const elementImage = this._element.querySelector(".element__image"); //поле image
         const elementTitle = this._element.querySelector(".element__title");
@@ -30,18 +30,18 @@ export class Card {
         return this._element;
     }
 
-
+    //корзина
     _delElement() {
         this._element.remove();
 
     }
-
+    //лайк
     _addLike() {
         this._element.querySelector('.element__heart').classList.toggle('element__heart_on');
 
     }
-
-    _openPhoto(evt) {//открыть фото
+    //открывает фото
+    _openPhoto() {
         const imagePopup = document.querySelector('.popup-image');
         const imagePopupSrc = document.querySelector('.popup-image__src');//для функции добавления фото_ссылка
         const imagePopupText = document.querySelector('.popup-image__text');//для функции добавления фото_текст
