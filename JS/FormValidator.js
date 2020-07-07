@@ -4,11 +4,11 @@ export class FormValidator{
     this._formElement = formElement;
     this._optionsValidation = optionsValidation;
     
-    this._errorClass = this._formElement.errorClass;
-    this._inputSelector = this._formElement.inputSelector;
-    this._submitButtonSelector = this._formElement.submitButtonSelector;
-    this._popupButtonSaveInactive = this._formElement.popupButtonSaveInactive;
-    this._formSelector = this._formElement.formSelector;
+    this._errorClass = Array.from(this._formElement.querySelectorAll(this.errorClass));
+    this._inputSelector = Array.from(this._formElement.querySelectorAll(this.inputSelecto));
+    this._submitButtonSelector = Array.from(this._formElement.querySelectorAll(this.submitButtonSelector));
+    this._popupButtonSaveInactive = Array.from(this._formElement.querySelectorAll(this.popupButtonSaveInactive));
+    this._formSelector = Array.from(this._formElement.querySelectorAll(this.formSelector));
 
 }
 

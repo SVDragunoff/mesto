@@ -18,6 +18,9 @@ const popupUrl = document.querySelector('.popup-place__inputs_link');//ссыл�
 const popupTitle = document.querySelector('.popup-place__inputs_name');//текс фото
 const elements = document.querySelector(".elements") //шаблон
 const imgClose = document.querySelector('.popup-image__button-close');//кнопка закрытия фото
+const formEditProfile = document.querySelector('.popup__container');
+const formPlace = document.querySelector('.popup-place__container');
+
 const optionsValidation = {
     errorClass: '.error',
     inputSelector: '.popup__inputs',
@@ -25,8 +28,8 @@ const optionsValidation = {
     popupButtonSaveInactive: 'popup__button_disabled',
     formSelector: '.popup__container',
 };
-const editProfileValid = new FormValidator(formElement, optionsValidation);
-const placeFormValid = new FormValidator(addPlace, optionsValidation);
+const editProfileValid = new FormValidator(formEditProfile, optionsValidation);
+const placeFormValid = new FormValidator(formPlace, optionsValidation);
 editProfileValid.enableValidation();
 placeFormValid.enableValidation();
 
