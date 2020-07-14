@@ -1,4 +1,5 @@
 import Card from './Card.js';
+import Section from './Section.js';
 import { FormValidator } from './FormValidator.js';
 import { openPopup, closePopup, closeButtonCross } from './utils.js';
 import { initialCards } from './cardsArray.js';
@@ -33,11 +34,11 @@ const placeFormValid = new FormValidator(formPlace, optionsValidation);
 editProfileValid.enableValidation();
 placeFormValid.enableValidation();
 
-initialCards.forEach((element) => {
+/*initialCards.forEach((element) => {
     const card = new Card(element.link, element.name, '.cardTemplate');
     const cardElement = card.creatElement();
     elements.prepend(cardElement);
-})
+})*/
 
 //Открывает и закрывает попап редактирования профиля
 function openProfile() {
