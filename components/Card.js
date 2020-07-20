@@ -1,4 +1,7 @@
-import { PopupWithForm } from '../components/PopupWithForm.js';
+import { openPopup } from '../utils/utils.js';
+import Popup from '../components/Popup.js';
+
+//import Popup from './Popup.js';
 export default class Card {
     constructor(link, name, cardSelector) {
         this._link = link;
@@ -45,10 +48,7 @@ export default class Card {
         const imagePopup = document.querySelector('.popup-image');
         const imagePopupSrc = document.querySelector('.popup-image__src');//для функции добавления фото_ссылка
         const imagePopupText = document.querySelector('.popup-image__text');//для функции добавления фото_текст
-        
-        const popup = new PopupWithForm(imagePopup, undefined)
-        popup.openPopup();
-        
+        openPopup(imagePopup);
         imagePopupSrc.src = this._link;
         imagePopupText.textContent = this._name;
     }
@@ -56,3 +56,5 @@ export default class Card {
 
 
 }
+/*const popupSelector = new Popup(formElement)
+popupSelector.openPopup()*/

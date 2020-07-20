@@ -18,9 +18,9 @@ export function mouseClickOverlay(evt) {
     if (event.target.classList.contains('popup')) { // клик на оверлей 
         closePopup(evt.target)
     }
-}*/
+}
 export function closeButtonCross() {//кнопка "крест" в попапах редактирования профиля и место
     document.querySelector('.popup_open').classList.remove('popup_open');
-}
+}*/
 
 

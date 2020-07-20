@@ -1,9 +1,11 @@
 import Card from './Card.js';
-import Section from './Section.js';
 import { FormValidator } from './FormValidator.js';
-import { openPopup, closePopup, closeButtonCross } from './utils.js';
+import { closeButtonCross } from './utils.js';
 import { initialCards } from './cardsArray.js';
-//Массив для класса FormValidator
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import Section from './Section.js';
+
+
 
 const editProfile = document.querySelector('.profile__info-button');//кнопка редактирования профиля
 const closeProfile = document.querySelector('.popup__button-close');//кнопка закрытия окна редактирования профиля
@@ -21,7 +23,7 @@ const elements = document.querySelector(".elements") //шаблон
 const imgClose = document.querySelector('.popup-image__button-close');//кнопка закрытия фото
 const formEditProfile = document.querySelector('.popup__container');
 const formPlace = document.querySelector('.popup-place__container');
-
+//Массив для класса FormValidator
 const optionsValidation = {
     errorClass: '.error',
     inputSelector: '.popup__inputs',
@@ -42,7 +44,8 @@ placeFormValid.enableValidation();
 
 //Открывает и закрывает попап редактирования профиля
 function openProfile() {
-    openPopup(formElement);
+    const popup = new PopupWithForm(formElement, undefined)
+    popup.openPopup();
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
     editProfileValid.clearErrors()
@@ -50,23 +53,27 @@ function openProfile() {
 //функция присвоения введенных данных в окне "Попап" для соответствующего поля
 function formSubmitHandler(evt) {
     evt.preventDefault();
+    const popup = new PopupWithForm(formElement, undefined)
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
-    closePopup(formElement);
+    popup.closePopup();
 }
 //Открывает попап "Место"
 function openAdd() {
-    openPopup(addPlace);
+    const popup = new PopupWithForm(addPlace, undefined)
+    popup.openPopup();
     popupUrl.value = '';
     popupTitle.value = '';
     placeFormValid.clearErrors()
 
 }
+
 //создает карточку
 function creatCard(e) {//функция создания новых фото
     e.preventDefault(); //отмена отправки формы
+    const popup = new PopupWithForm(addPlace, undefined)
     elements.prepend(new Card(popupUrl.value, popupTitle.value, '.cardTemplate').creatElement());//помещаем фото в начало списка
-    closePopup(addPlace);
+    popup.closePopup();
 }
 
 //кнопка "редактирование"
