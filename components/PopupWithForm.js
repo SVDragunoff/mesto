@@ -4,6 +4,7 @@ export class PopupWithForm extends Popup {
 
     constructor(popupSelector, callBack) {
         super(popupSelector)
+        this._popupForm = document.querySelector('.popup');
         this._callBack = callBack;
     }
 
@@ -11,13 +12,13 @@ export class PopupWithForm extends Popup {
 
     }
 
-
     setEventListeners() {
         super.setEventListeners();
+        this._popupForm.addEventListener('submit', this._callBack);
     }
 
     closePopup(elem) {//закрывает попап
         super.closePopup();
-
+    
     }
 }

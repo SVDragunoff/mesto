@@ -27,7 +27,7 @@ export default class Popup {
     }
 
     setEventListeners() {
-        this._closeButton.addEventListener('click', this.closePopup, {once: true})
+        this._closeButton.addEventListener('click', this.closePopup)
     }
     
     _handleEscClose(evt) {
