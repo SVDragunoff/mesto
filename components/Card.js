@@ -1,5 +1,6 @@
 import { openPopup } from '../utils/utils.js';
 import Popup from '../components/Popup.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 
 //import Popup from './Popup.js';
 export default class Card {
@@ -45,13 +46,9 @@ export default class Card {
     }
     //открывает фото
     _openPhoto() {
-        const imagePopup = document.querySelector('.popup-image');
-        const imagePopupSrc = document.querySelector('.popup-image__src');//для функции добавления фото_ссылка
-        const imagePopupText = document.querySelector('.popup-image__text');//для функции добавления фото_текст
-        openPopup(imagePopup);
-        imagePopupSrc.src = this._link;
-        imagePopupText.textContent = this._name;
-    }
+        const popup = new PopupWithImage(this._link, this._name)
+        popup.openPopup();
+        }
 
 
 
