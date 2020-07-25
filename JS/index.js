@@ -1,7 +1,6 @@
 import Card from './Card.js';
 import { FormValidator } from './FormValidator.js';
 import { closeButtonCross } from './utils.js';
-import { initialCards } from './cardsArray.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
 import Section from './Section.js';
@@ -43,9 +42,7 @@ placeFormValid.enableValidation();
 //функция присвоения введенных данных в окне "Попап" для соответствующего поля
 const formSubmitHandler = (evt) => {
     evt.preventDefault();
-
     userInfo.setUserInfo(nameInput.value, jobInput.value)
-
     popup.closePopup();
 }
 
@@ -60,12 +57,9 @@ const userInfo = new UserInfo(profileName, profileJob)
 //Открывает и закрывает попап редактирования профиля
 function openProfile() {
     popup.openPopup();
-
     let info = userInfo.getUserInfo();
-
     nameInput.value = info.name;
     jobInput.value = info.job;
-
     editProfileValid.clearErrors()
 }
 
@@ -90,10 +84,6 @@ function creatCard(e) {//функция создания новых фото
 
 //кнопка "редактирование"
 editProfile.addEventListener('click', openProfile);
-//кнопка "крест" editProfile
-//closeProfile.addEventListener('click', closeButtonCross);
-//кнопка "сохранить"
-// formElement.addEventListener('submit', formSubmitHandler);
 //открывает и закрывает попоап "Место"
 addImage.addEventListener('click', openAdd);
 //кнопка "крест" place
