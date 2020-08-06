@@ -1,9 +1,11 @@
-import Card from './Card.js';
-import { FormValidator } from './FormValidator.js';
-import { closeButtonCross } from './utils.js';
+import Card from '../JS/Card.js';
+import FormValidator from '../JS/FormValidator.js';
+import { closeButtonCross } from '../JS/utils.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
-import Section from './Section.js';
+import Section from '../JS/Section.js';
+import indexCss from '../pages/index.css'
+
 
 
 
