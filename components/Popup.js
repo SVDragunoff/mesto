@@ -23,9 +23,8 @@ export default class Popup {
         document.removeEventListener('keydown', this._handleEscClose);
         this._popupSelector.removeEventListener('click', () => {if (event.target.classList.contains('popup')) { // "клик на оверлей" удаляет слушатель
             this.closePopup();
-        }});
     }
-
+})}
     setEventListeners() {
         this._closeButton.addEventListener('click', this.closePopup)
     }

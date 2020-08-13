@@ -1,9 +1,9 @@
 .element__button-heart{
     border:none;
     background-color: #FFFFFF;
-    width: 35px;
+    width: 60px;
     justify-self: flex-end;
-    
+    border-radius: 10px;
 }
 .element__button-heart:focus{
     outline: none;

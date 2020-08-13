@@ -1,10 +1,12 @@
-import Card from '../JS/Card.js';
-import FormValidator from '../JS/FormValidator.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
 import { closeButtonCross } from '../JS/utils.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
 import { UserInfo } from '../components/UserInfo.js';
-import Section from '../JS/Section.js';
-import indexCss from '../pages/index.css'
+import Section from '../components/Section.js';
+import indexCss from '../pages/index.css';
+import { initialCards } from '../JS/cardsArray.js';
 
 
 
@@ -41,6 +43,21 @@ const placeFormValid = new FormValidator(formPlace, optionsValidation);
 editProfileValid.enableValidation();
 placeFormValid.enableValidation();
 
+const renderCard = new Section({
+    items: initialCards,
+    renderer: (item) => {
+        const card = new Card(item.link, item.name, '.cardTemplate');
+        const cardElement = card.creatElement();
+        return cardElement;
+    }
+}, '.elements');
+renderCard.renderItems();
+
+// const handleCardClick = (name, link) => {
+//     popupWithImage.openPopup(name, link);
+//   }
+
+
 //функция присвоения введенных данных в окне "Попап" для соответствующего поля
 const formSubmitHandler = (evt) => {
     evt.preventDefault();
@@ -59,7 +76,7 @@ const userInfo = new UserInfo(profileName, profileJob)
 //Открывает и закрывает попап редактирования профиля
 function openProfile() {
     popup.openPopup();
-    let info = userInfo.getUserInfo();
+    const info = userInfo.getUserInfo();
     nameInput.value = info.name;
     jobInput.value = info.job;
     editProfileValid.clearErrors()

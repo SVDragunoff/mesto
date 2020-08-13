@@ -1,4 +1,4 @@
-import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupWithImage } from './PopupWithImage.js';
 export default class Card {
     constructor(link, name, cardSelector) {
         this._link = link;
@@ -26,13 +26,14 @@ export default class Card {
         elementTitle.textContent = this._name; //вставляем текст из массива
         elementLike.addEventListener('click', () => this._addLike());
         elementDelete.addEventListener('click', () => this._delElement());
-        this._element.querySelector('.element__image').addEventListener('click', () => this._openPhoto());
+        elementImage.addEventListener('click', () => this._openPhoto());
         return this._element;
     }
 
     //корзина
     _delElement() {
         this._element.remove();
+        this._element = null;
 
     }
     //лайк
@@ -42,8 +43,8 @@ export default class Card {
     }
     //открывает фото
     _openPhoto() {
-        const popup = new PopupWithImage(this._link, this._name)
-        popup.openPopup();
+        const popup = new PopupWithImage()
+        popup.openPopup(this._link, this._name);
     }
 
 

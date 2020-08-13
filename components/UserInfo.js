@@ -5,7 +5,7 @@
     }
   
     getUserInfo() {
-        let userInfo = {
+        const userInfo = {
             name:  this._profileName.textContent,
             job:  this._profileJob.textContent
           };
