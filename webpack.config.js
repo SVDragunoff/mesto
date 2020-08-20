@@ -6,7 +6,7 @@ const plugins = [
 ];
 
 module.exports = {
-  entry: { main: './src/index.js' },
+  entry: { main: './src/pages/index.js' },
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')

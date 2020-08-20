@@ -1,9 +1,10 @@
 import { PopupWithImage } from './PopupWithImage.js';
 export default class Card {
-    constructor(link, name, cardSelector) {
+    constructor(link, name, cardSelector, handleCardClick ) {
         this._link = link;
         this._name = name;
         this._cardSelector = cardSelector;
+        this._handleCardClick = handleCardClick;
     }
     //копирует Template елемент
     _getTemplate() {
@@ -26,7 +27,7 @@ export default class Card {
         elementTitle.textContent = this._name; //вставляем текст из массива
         elementLike.addEventListener('click', () => this._addLike());
         elementDelete.addEventListener('click', () => this._delElement());
-        elementImage.addEventListener('click', () => this._openPhoto());
+        elementImage.addEventListener('click', () => this._handleCardClick());
         return this._element;
     }
 
@@ -42,11 +43,9 @@ export default class Card {
 
     }
     //открывает фото
-    _openPhoto() {
-        const popup = new PopupWithImage()
-        popup.openPopup(this._link, this._name);
-    }
-
-
+    // _openPhoto() {
+    //     const popup = new PopupWithImage()
+    //     popup.openPopup(this._link, this._name);
+    // }
 
 }

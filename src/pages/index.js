@@ -1,12 +1,11 @@
-import Card from '../components/Card.js';
-import FormValidator from '../components/FormValidator.js';
-import { closeButtonCross } from '../JS/utils.js';
-import { PopupWithForm } from '../components/PopupWithForm.js';
-import { PopupWithImage } from '../components/PopupWithImage.js';
-import { UserInfo } from '../components/UserInfo.js';
-import Section from '../components/Section.js';
-import indexCss from '../pages/index.css';
-import { initialCards } from '../JS/cardsArray.js';
+import './index.css';
+import Card from '../../components/Card.js';
+import FormValidator from '../../components/FormValidator.js';
+import { PopupWithForm } from '../../components/PopupWithForm.js';
+import { PopupWithImage } from '../../components/PopupWithImage.js';
+import { UserInfo } from '../../components/UserInfo.js';
+import Section from '../../components/Section.js';
+import { initialCards } from '../utils/cardsArray';
 
 
 
@@ -43,19 +42,23 @@ const placeFormValid = new FormValidator(formPlace, optionsValidation);
 editProfileValid.enableValidation();
 placeFormValid.enableValidation();
 
+const popupWithImage = new PopupWithImage()
+popupWithImage.setEventListeners();
+function handleCardClick() {    
+    popupWithImage.openPopup(this._link, this._name);
+}
+
+
 const renderCard = new Section({
     items: initialCards,
     renderer: (item) => {
-        const card = new Card(item.link, item.name, '.cardTemplate');
+        const card = new Card(item.link, item.name, '.cardTemplate',handleCardClick);
         const cardElement = card.creatElement();
         return cardElement;
     }
 }, '.elements');
 renderCard.renderItems();
 
-// const handleCardClick = (name, link) => {
-//     popupWithImage.openPopup(name, link);
-//   }
 
 
 //функция присвоения введенных данных в окне "Попап" для соответствующего поля
@@ -68,6 +71,8 @@ const formSubmitHandler = (evt) => {
 
 const popup = new PopupWithForm(formElement, formSubmitHandler)
 popup.setEventListeners()
+const popupAdd = new PopupWithForm(addPlace, formSubmitHandler)
+popupAdd.setEventListeners()
 
 
 const userInfo = new UserInfo(profileName, profileJob)
@@ -90,14 +95,13 @@ function openAdd() {
     popupUrl.value = '';
     popupTitle.value = '';
     placeFormValid.clearErrors()
-
 }
 
 //создает карточку
 function creatCard(e) {//функция создания новых фото
     e.preventDefault(); //отмена отправки формы
     const popup = new PopupWithForm(addPlace, undefined)
-    elements.prepend(new Card(popupUrl.value, popupTitle.value, '.cardTemplate').creatElement());//помещаем фото в начало списка
+    elements.prepend(new Card(popupUrl.value, popupTitle.value, '.cardTemplate',handleCardClick).creatElement());//помещаем фото в начало списка
     popup.closePopup();
 }
 
