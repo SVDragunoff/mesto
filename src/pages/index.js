@@ -109,12 +109,10 @@ function creatCard(e) {//функция создания новых фото
 editProfile.addEventListener('click', openProfile);
 //открывает и закрывает попоап "Место"
 addImage.addEventListener('click', openAdd);
-//кнопка "крест" place
-addClose.addEventListener('click', closeButtonCross);
 //сохраняет новое фото
 addPlace.addEventListener('submit', creatCard);
-//кновка "крест" закрывает изображение
-imgClose.addEventListener('click', closeButtonCross);
+
+
 
 
 

@@ -1,4 +1,3 @@
-import { PopupWithImage } from './PopupWithImage.js';
 export default class Card {
     constructor(link, name, cardSelector, handleCardClick ) {
         this._link = link;
@@ -42,10 +41,6 @@ export default class Card {
         this._element.querySelector('.element__heart').classList.toggle('element__heart_on');
 
     }
-    //открывает фото
-    // _openPhoto() {
-    //     const popup = new PopupWithImage()
-    //     popup.openPopup(this._link, this._name);
-    // }
+
 
 }
